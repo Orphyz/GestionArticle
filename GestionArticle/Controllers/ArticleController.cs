@@ -20,13 +20,15 @@ namespace GestionArticle.Controllers
 
         public IActionResult Details(int id)
         {
-            return View(ArticleService.GetById(id));
+            return View(_service.GetById(id));
         }
-
         public IActionResult Create()
         {
-            return View();
+
+                return View();
+
         }
+
 
         [HttpPost]
         public IActionResult Create(ArticleForm form)
@@ -39,10 +41,21 @@ namespace GestionArticle.Controllers
             _service.Create(form.ToData());
             return RedirectToAction("Index");
         }
+        ////[HttpPost]
+        ////public IActionResult Create(ArticleForm form)
+        ////{
+        ////    if (!ModelState.IsValid)
+        ////    {
+        ////        return View(form);
+        ////    }
+
+        ////    _service.Create(form.ToData());
+        ////    return RedirectToAction("Index");
+        ////}
 
         public IActionResult Delete(int id)
         {
-            ArticleService.Delete(id);
+            _service.Delete(id);
             return RedirectToAction("Index");
         }
 
